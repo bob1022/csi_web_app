@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Checklist Item</title>
+</head>
+<body>
+
+    <h1>Edit Checklist Item</h1>
+
+    <form method="POST">
+
+    <label>
+        Division:
+    </label>
+
+    <select name="division">
+
+    <option value="03"
+        {% if item.division == "03" %}selected{% endif %}>
+        03 - Concrete
+    </option>
+
+    <option value="04"
+        {% if item.division == "04" %}selected{% endif %}>
+        04 - Masonry
+    </option>
+
+    <option value="05"
+        {% if item.division == "05" %}selected{% endif %}>
+        05 - Metals
+    </option>
+
+    <option value="06"
+        {% if item.division == "06" %}selected{% endif %}>
+        06 - Wood
+    </option>
+
+    <option value="07"
+        {% if item.division == "07" %}selected{% endif %}>
+        07 - Thermal & Moisture
+    </option>
+
+     <option value="08"
+        {% if item.division == "08" %}selected{% endif %}>
+        08 - Openings
+    </option>
+
+    <option value="09"
+        {% if item.division == "09" %}selected{% endif %}>
+        09 - Finishes
+    </option>
+
+    <option value="22"
+        {% if item.division == "22" %}selected{% endif %}>
+        22 - Plumbing
+    </option>
+
+    <option value="23"
+        {% if item.division == "23" %}selected{% endif %}>
+        23 - HVAC
+    </option>
+
+    <option value="26"
+        {% if item.division == "26" %}selected{% endif %}>
+        26 - Electrical
+    </option>
+
+</select>
+
+        <br><br>
+
+        <label>
+            Description:
+        </label>
+
+        <input
+            type="text"
+            name="description"
+            value="{{ item.description }}"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+</body>
+</html>

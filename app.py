@@ -121,6 +121,14 @@ def project_detail(project_id):
 
     project = Project.query.get_or_404(project_id)
 
+    sorted_items = sorted(
+        project.checklist_items,
+        key=lambda item: (
+            item.status == "Complete",
+            item.division
+        )
+    )
+
     total_items = len(project.checklist_items)
 
     completed_items = sum(
@@ -138,13 +146,23 @@ def project_detail(project_id):
     else:
         progress_percent = 0
 
+    sorted_items = sorted(
+        project.checklist_items,
+        key=lambda item: (
+            item.status == "Complete",
+            item.division,
+            item.description
+        )
+    )
+
     return render_template(
         "project.html",
         project=project,
         total_items=total_items,
         completed_items=completed_items,
         open_items=open_items,
-        progress_percent=progress_percent
+        progress_percent=progress_percent,
+        sorted_items=sorted_items
     )
 
 @app.route("/complete_item/<int:item_id>")
@@ -206,6 +224,36 @@ def delete_item(item_id):
         )
     )
 
+@app.route(
+    "/edit_item/<int:item_id>",
+    methods=["GET", "POST"]
+)
+def edit_item(item_id):
+    """
+    Edit an existing checklist item.
+    """
+
+    item = ChecklistItem.query.get_or_404(item_id)
+
+    if request.method == "POST":
+
+        item.division = request.form["division"]
+
+        item.description = request.form["description"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=item.project_id
+            )
+        )
+
+    return render_template(
+        "edit_item.html",
+        item=item
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
