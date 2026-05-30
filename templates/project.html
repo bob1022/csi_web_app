@@ -8,6 +8,38 @@
     <h1>{{ project.project_name }}</h1>
 
     <p>
+        Progress: {{ progress_percent }}%
+    </p>
+
+<div style="width:300px; border:1px solid black;">
+
+    <div
+        style="
+            width: {{ progress_percent }}%;
+            background-color: lightgreen;
+            height: 20px;
+            text-align: center;
+        ">
+        {{ progress_percent }}%
+    </div>
+
+</div>
+
+    <p>
+        Total Items: {{ total_items }}
+    </p>
+
+    <p>
+        Completed Items: {{ completed_items }}
+    </p>
+
+    <p>
+        Open Items: {{ open_items }}
+    </p>
+
+    <hr> 
+
+    <p>
         Project ID: {{ project.id }}
     </p>
 

@@ -121,9 +121,30 @@ def project_detail(project_id):
 
     project = Project.query.get_or_404(project_id)
 
+    total_items = len(project.checklist_items)
+
+    completed_items = sum(
+        1
+        for item in project.checklist_items
+        if item.status == "Complete"
+    )
+
+    open_items = total_items - completed_items
+
+    if total_items > 0:
+        progress_percent = round(
+            (completed_items / total_items) * 100
+        )
+    else:
+        progress_percent = 0
+
     return render_template(
         "project.html",
-        project=project
+        project=project,
+        total_items=total_items,
+        completed_items=completed_items,
+        open_items=open_items,
+        progress_percent=progress_percent
     )
 
 @app.route("/complete_item/<int:item_id>")
