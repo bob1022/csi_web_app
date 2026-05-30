@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Detail</title>
+</head>
+<body>
 
+    <h1>{{ project.project_name }}</h1>
+
+    <p>
+        Project ID: {{ project.id }}
+    </p>
+
+    <hr>
+
+   <h2>Checklist Items</h2>
+
+{% if project.checklist_items %}
+
+    <ul>
+
+    {% for item in project.checklist_items %}
+
+    <li>
+
+        ID={{ item.id }}
+        -
+        {{ item.division }}
+        -
+        {{ item.description }}
+        -
+        {{ item.status }}
+
+        {% if item.status == "Open" %}
+
+            <a href="/complete_item/{{ item.id }}">
+                [Complete]
+            </a>
+
+        {% else %}
+
+            <a href="/reopen_item/{{ item.id }}">
+                [Reopen]
+            </a>
+
+        {% endif %}
+
+            <a href="/delete_item/{{ item.id }}"
+                onclick="return confirm('Are you sure you want to delete this checklist item?');">
+                [Delete]
+            </a>
+    </li>
+
+    {% endfor %}
+
+    </ul>
+
+{% else %}
+
+    <p>No checklist items found.</p>
+
+{% endif %}
+
+    <p>
+        <a href="/project/{{ project.id }}/add_item">
+            Add Checklist Item
+        </a>
+    </p>
+
+    <p>
+        <a href="/projects">
+            Back to Projects
+        </a>
+    </p>
+
+</body>
+</html>

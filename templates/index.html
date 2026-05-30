@@ -1,1 +1,42 @@
+<!--$HTML template-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSI Projects</title>
+</head>
+<body>
 
+    <h1>CSI Project List</h1>
+
+    <p>
+        <a href="/add_project">
+            Add New Project
+        </a>
+    </p>
+
+    <hr>
+
+    {% if projects %}
+
+        <ul>
+
+        {% for project in projects %}
+
+    <li>
+        <a href="/project/{{ project.id }}">
+            {{ project.project_name }}
+        </a>
+    </li>
+
+        {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>No projects found.</p>
+
+    {% endif %}
+
+</body>
+</html>
