@@ -8,6 +8,31 @@
     <h1>{{ project.project_name }}</h1>
 
     <p>
+        <a href="/edit_project/{{ project.id }}">
+            Edit Project Description
+        </a>
+    
+        |
+
+    <a href="/delete_project/{{ project.id }}"
+        onclick="return confirm('Delete this project and ALL checklist items? This cannot be undone.');">
+        Delete Project
+    </a>
+    </p>
+
+    {% if project.notes %}
+
+        <h3>Project Description</h3>
+
+        <p>
+            <pre>{{ project.notes }}</pre>
+        </p>
+
+        <hr>
+
+    {% endif %}
+
+    <p>
         Progress: {{ progress_percent }}%
     </p>
 
@@ -57,7 +82,7 @@
 
     {% for item in sorted_items %}
 
-        {% if item.status == "Open" %}
+        {% if item.status == "Open" or item.status == "In Progress" %}
 
         <li>
 
@@ -66,9 +91,15 @@
             {{ item.division }}
             -
             {{ item.description }}
+            -
+            {{ item.status }}
 
             <a href="/complete_item/{{ item.id }}">
                 [Complete]
+            </a>
+
+            <a href="/in_progress_item/{{ item.id }}">
+                [In Progress]
             </a>
 
             <a href="/edit_item/{{ item.id }}">

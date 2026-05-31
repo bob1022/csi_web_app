@@ -38,9 +38,8 @@ with app.app_context():
 #$ Home page route
 @app.route("/")
 def home():
-    """
+    
     #$ Home page route.
-    """
     return "CSI Web App Running"
 
 #$ Projects List
@@ -49,19 +48,55 @@ def projects():
 
     project_list = Project.query.all()
 
+    project_data = []
+
+    for project in project_list:
+
+        total_items = len(project.checklist_items)
+
+        completed_items = len(
+            [
+                item
+                for item in project.checklist_items
+                if item.status == "Complete"
+            ]
+        )
+
+        open_items = total_items - completed_items
+
+        if total_items > 0:
+
+            progress_percent = int(
+                (completed_items / total_items) * 100
+            )
+
+        else:
+
+            progress_percent = 0
+
+        project_data.append(
+            {
+                "project": project,
+                "total_items": total_items,
+                "completed_items": completed_items,
+                "open_items": open_items,
+                "progress_percent": progress_percent
+            }
+        )
+
     return render_template(
         "index.html",
-        projects=project_list
+        project_data=project_data
     )
+
 #$ Add Item
 @app.route(
     "/project/<int:project_id>/add_item",
     methods=["GET", "POST"]
 )
 def add_item(project_id):
-    """
+    
     #$ Add a checklist item to a project.
-    """
 
     project = Project.query.get_or_404(project_id)
 
@@ -102,8 +137,11 @@ def add_project():
 
         project_name = request.form["project_name"]
 
+        notes = request.form["notes"]
+
         new_project = Project(
-            project_name=project_name
+            project_name=project_name,
+            notes=notes
         )
 
         db.session.add(new_project)
@@ -146,12 +184,17 @@ def project_detail(project_id):
     else:
         progress_percent = 0
 
+    status_order = {
+    "Open": 0,
+    "In Progress": 1,
+    "Complete": 2
+    }
+
     sorted_items = sorted(
         project.checklist_items,
         key=lambda item: (
-            item.status == "Complete",
-            item.division,
-            item.description
+            status_order.get(item.status, 99),
+            item.division
         )
     )
 
@@ -250,6 +293,78 @@ def edit_item(item_id):
         "edit_item.html",
         item=item
     )
+
+# *============================================================
+# * Edit Project
+# *============================================================
+
+@app.route(
+    "/edit_project/<int:project_id>",
+    methods=["GET", "POST"]
+)
+def edit_project(project_id):
+
+    # * Display project form and save changes.
+
+    project = Project.query.get_or_404(project_id)
+
+    if request.method == "POST":
+
+        project.project_name = request.form["project_name"]
+
+        project.notes = request.form["notes"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=project.id
+            )
+        )
+
+    return render_template(
+        "edit_project.html",
+        project=project
+    )
+
+# *============================================================
+# * Delete Project
+# *===========================================================
+
+@app.route("/delete_project/<int:project_id>")
+def delete_project(project_id):
+
+    project = Project.query.get_or_404(project_id)
+
+    db.session.delete(project)
+
+    db.session.commit()
+
+    return redirect(
+        url_for("projects")
+    )
+
+# *============================================================
+# * Mark Item In Progress
+# *============================================================
+
+@app.route("/in_progress_item/<int:item_id>")
+def in_progress_item(item_id):
+
+    item = ChecklistItem.query.get_or_404(item_id)
+
+    item.status = "In Progress"
+
+    db.session.commit()
+
+    return redirect(
+        url_for(
+            "project_detail",
+            project_id=item.project_id
+        )
+    )
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -30,7 +30,8 @@ class Project(db.Model):
     checklist_items = db.relationship(
         "ChecklistItem",
         backref="project",
-        lazy=True
+        lazy=True,
+        cascade="all, delete-orphan"
     )
 
     def __repr__(self):

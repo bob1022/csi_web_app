@@ -1,52 +1,47 @@
-<!--$Add project form-->
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Project</title>
+    <title>Edit Project</title>
 </head>
 <body>
 
-    <h1>Add Project</h1>
+    <h1>Edit Project</h1>
 
     <form method="POST">
 
-        <label for="project_name">
+        <label>
             Project Name:
         </label>
 
         <input
             type="text"
-            id="project_name"
             name="project_name"
+            value="{{ project.project_name }}"
             required
         >
-        
+
         <br><br>
 
         <label>
-            Notes:
+            Project Description:
         </label>
 
         <br>
 
         <textarea
             name="notes"
-            rows="5"
-            cols="50">
-        </textarea>
+            rows="6"
+            cols="60"
+        >{{ project.notes }}</textarea>
 
         <br><br>
 
         <button type="submit">
-            Add Project
+            Save Changes
         </button>
 
     </form>
-<p>
-    <a href="/projects">
-        Back to Projects
-    </a>
-</p>
 
 </body>
 </html>
