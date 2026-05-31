@@ -1,8 +1,8 @@
-"""
-app.py
 
-Main application file for the CSI Web App.
-"""
+#*==========================================
+#* app.py
+#*Main application file for the CSI Web App.
+#*==========================================
 
 from flask import (
     Flask,
@@ -22,27 +22,28 @@ from models import Project, ChecklistItem
 
 app = Flask(__name__)
 
-# SQLite database location
+#$ SQLite database location
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///csi_database.db"
 
-# Disable warning message
+#$ Disable warning message
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# Connect database to Flask
+#$ Connect database to Flask
 db.init_app(app)
 
-# Create database and tables
+#$ Create database and tables
 with app.app_context():
     db.create_all()
 
-
+#$ Home page route
 @app.route("/")
 def home():
     """
-    Home page route.
+    #$ Home page route.
     """
     return "CSI Web App Running"
 
+#$ Projects List
 @app.route("/projects")
 def projects():
 
@@ -52,14 +53,14 @@ def projects():
         "index.html",
         projects=project_list
     )
-
+#$ Add Item
 @app.route(
     "/project/<int:project_id>/add_item",
     methods=["GET", "POST"]
 )
 def add_item(project_id):
     """
-    Add a checklist item to a project.
+    #$ Add a checklist item to a project.
     """
 
     project = Project.query.get_or_404(project_id)
@@ -91,12 +92,11 @@ def add_item(project_id):
         "add_item.html",
         project=project
     )
-
+#$ Add Project
 @app.route("/add_project", methods=["GET", "POST"])
 def add_project():
-    """
-    Display project form and save project.
-    """
+
+    #$ Display project form and save project.
 
     if request.method == "POST":
 
@@ -113,11 +113,11 @@ def add_project():
 
     return render_template("add_project.html")
 
+#$ Project Detail
 @app.route("/project/<int:project_id>")
 def project_detail(project_id):
-    """
-    Display information for a single project.
-    """
+    
+    #$ Display information for a single project.
 
     project = Project.query.get_or_404(project_id)
 
@@ -164,12 +164,11 @@ def project_detail(project_id):
         progress_percent=progress_percent,
         sorted_items=sorted_items
     )
-
+#$ Complete Item
 @app.route("/complete_item/<int:item_id>")
 def complete_item(item_id):
-    """
-    Mark a checklist item as complete.
-    """
+    
+    #$ Mark a checklist item as complete.
 
     item = ChecklistItem.query.get_or_404(item_id)
 
@@ -183,12 +182,11 @@ def complete_item(item_id):
             project_id=item.project_id
         )
     )
-
+#$ Reopen Item
 @app.route("/reopen_item/<int:item_id>")
 def reopen_item(item_id):
-    """
-    Reopen a completed checklist item.
-    """
+    
+    #$ Reopen a completed checklist item.
 
     item = ChecklistItem.query.get_or_404(item_id)
 
@@ -202,12 +200,11 @@ def reopen_item(item_id):
             project_id=item.project_id
         )
     )
-
+#$ Delete Item
 @app.route("/delete_item/<int:item_id>")
 def delete_item(item_id):
-    """
-    Delete a checklist item.
-    """
+    
+    #$ Delete a checklist item.
 
     item = ChecklistItem.query.get_or_404(item_id)
 
@@ -223,15 +220,14 @@ def delete_item(item_id):
             project_id=project_id
         )
     )
-
+#$ Edit Item
 @app.route(
     "/edit_item/<int:item_id>",
     methods=["GET", "POST"]
 )
 def edit_item(item_id):
-    """
-    Edit an existing checklist item.
-    """
+    
+    #$ Edit an existing checklist item.
 
     item = ChecklistItem.query.get_or_404(item_id)
 

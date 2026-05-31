@@ -1,16 +1,16 @@
-"""
-models.py
 
-Database models for the CSI Web App.
-"""
+#$============================================
+#$models.py
+#$Database models for the CSI Web App.
+#$Defines the Project and ChecklistItem models using SQLAlchemy.
+#$============================================
 
 from database import db
 
 
 class Project(db.Model):
-    """
-    Stores project information.
-    """
+    
+    #$Stores project information.
 
     id = db.Column(
         db.Integer,
@@ -20,6 +20,11 @@ class Project(db.Model):
     project_name = db.Column(
         db.String(100),
         nullable=False
+    )
+
+    notes = db.Column(
+        db.Text,
+        nullable=True
     )
 
     checklist_items = db.relationship(
@@ -32,9 +37,8 @@ class Project(db.Model):
         return f"<Project {self.project_name}>"
     
 class ChecklistItem(db.Model):
-    """
-    Stores checklist items for a project.
-    """
+    
+    #$Stores checklist items for a project.
 
     id = db.Column(
         db.Integer,
