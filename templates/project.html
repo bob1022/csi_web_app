@@ -86,15 +86,16 @@
 
         <li>
 
-            ID={{ item.id }}
-            -
             {{ item.division }}
-            -
+-
             {{ item.description }}
             -
             {{ item.status }}
 
-            <a href="/complete_item/{{ item.id }}">
+
+            &nbsp;&nbsp;&nbsp;
+
+            <<a href="/complete_item/{{ item.id }}">
                 [Complete]
             </a>
 
@@ -129,11 +130,11 @@
 
         <li>
 
-            ID={{ item.id }}
-            -
             {{ item.division }}
-            -
+-
             {{ item.description }}
+
+             &nbsp;&nbsp;&nbsp;
 
             <a href="/reopen_item/{{ item.id }}">
                 [Reopen]
