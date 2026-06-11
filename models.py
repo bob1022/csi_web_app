@@ -22,11 +22,16 @@ class Project(db.Model):
         nullable=False
     )
 
-    notes = db.Column(
-        db.Text,
-        nullable=True
+    project_description = db.Column(
+    db.Text,
+    nullable=True
     )
-
+    project_notes = db.relationship(
+        "ProjectNote",
+        backref="project",
+        lazy=True,
+        cascade="all, delete-orphan"
+    )
     checklist_items = db.relationship(
         "ChecklistItem",
         backref="project",
@@ -70,3 +75,26 @@ class ChecklistItem(db.Model):
 
     def __repr__(self):
         return f"<ChecklistItem {self.description}>"
+
+class ProjectNote(db.Model):
+
+    #$  Stores notes for a project.
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    project_id = db.Column(
+        db.Integer,
+        db.ForeignKey("project.id"),
+        nullable=False
+    )
+
+    note_text = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    def __repr__(self):
+        return f"<ProjectNote {self.id}>"

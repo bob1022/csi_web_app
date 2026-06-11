@@ -8,7 +8,7 @@ add_project.html - this file is similar to the add checklist file and it adds a 
 
 Problem:
 
-Format On Save corrupted Jinja template code in edit_item.html.
+# Format On Save corrupted Jinja template code in edit_item.html.
 
 Example:
 
@@ -25,3 +25,28 @@ Disable Format On Save.
 Status:
 
 Investigate formatter configuration later.
+
+In Plain English
+
+This code says:
+
+Take some text based on the selected type,
+put that text into the modal window,
+and make the modal window visible.
+
+# This is a good example of something to document in your future docs/javascript_notes.md:
+
+# Modal Window
+
+Purpose:
+Display help text or instructions.
+
+Process:
+1. Find modal-text area.
+2. Insert selected text.
+3. Display modal window.
+
+Key Functions:
+getElementById()
+innerText
+style.display

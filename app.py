@@ -17,7 +17,7 @@ from flask import Flask, render_template
 from flask import Flask
 
 from database import db
-from models import Project, ChecklistItem
+from models import Project, ChecklistItem, ProjectNote
 
 
 app = Flask(__name__)
@@ -225,6 +225,87 @@ def complete_item(item_id):
             project_id=item.project_id
         )
     )
+
+#$ Add Note
+@app.route(
+    "/project/<int:project_id>/add_note",
+    methods=["GET", "POST"]
+)
+def add_note(project_id):
+
+    project = Project.query.get_or_404(project_id)
+
+    if request.method == "POST":
+
+        note_text = request.form["note_text"]
+
+        new_note = ProjectNote(
+            project_id=project.id,
+            note_text=note_text
+        )
+
+        db.session.add(new_note)
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=project.id
+            )
+        )
+
+    return render_template(
+        "notes/add_note.html",
+        project=project
+    )
+
+#$ Edit Note
+@app.route(
+    "/note/<int:note_id>/edit",
+    methods=["GET", "POST"]
+)
+def edit_note(note_id):
+
+    note = ProjectNote.query.get_or_404(note_id)
+
+    if request.method == "POST":
+
+        note.note_text = request.form["note_text"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=note.project_id
+            )
+        )
+
+    return render_template(
+        "notes/edit_note.html",
+        note=note
+    )
+
+#$ Delete Note
+@app.route(
+    "/note/<int:note_id>/delete"
+)
+def delete_note(note_id):
+
+    note = ProjectNote.query.get_or_404(note_id)
+
+    project_id = note.project_id
+
+    db.session.delete(note)
+    db.session.commit()
+
+    return redirect(
+        url_for(
+            "project_detail",
+            project_id=project_id
+        )
+    )
+
 #$ Reopen Item
 @app.route("/reopen_item/<int:item_id>")
 def reopen_item(item_id):
