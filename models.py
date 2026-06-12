@@ -32,6 +32,14 @@ class Project(db.Model):
         lazy=True,
         cascade="all, delete-orphan"
     )
+
+    instructions = db.relationship(
+        "Instruction",
+        backref="project",
+        lazy=True,
+        cascade="all, delete-orphan"
+    )
+
     checklist_items = db.relationship(
         "ChecklistItem",
         backref="project",
@@ -98,3 +106,24 @@ class ProjectNote(db.Model):
 
     def __repr__(self):
         return f"<ProjectNote {self.id}>"
+    
+class Instruction(db.Model):
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    project_id = db.Column(
+        db.Integer,
+        db.ForeignKey("project.id"),
+        nullable=False
+    )
+
+    instruction_text = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    def __repr__(self):
+        return f"<Instruction {self.id}>" 

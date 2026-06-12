@@ -19,6 +19,12 @@ from flask import Flask
 from database import db
 from models import Project, ChecklistItem, ProjectNote
 
+from models import (
+    Project,
+    ChecklistItem,
+    ProjectNote,
+    Instruction
+)
 
 app = Flask(__name__)
 
@@ -373,6 +379,39 @@ def edit_item(item_id):
     return render_template(
         "edit_item.html",
         item=item
+    )
+
+#$ Add Instruction
+@app.route(
+    "/project/<int:project_id>/add_instruction",
+    methods=["GET", "POST"]
+)
+def add_instruction(project_id):
+
+    project = Project.query.get_or_404(project_id)
+
+    if request.method == "POST":
+
+        instruction_text = request.form["instruction_text"]
+
+        new_instruction = Instruction(
+            project_id=project.id,
+            instruction_text=instruction_text
+        )
+
+        db.session.add(new_instruction)
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=project.id
+            )
+        )
+
+    return render_template(
+        "instruction/add_instruction.html",
+        project=project
     )
 
 # *============================================================
