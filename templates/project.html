@@ -180,7 +180,13 @@
 
 <h2>Project Notes</h2>
 
-<p>Total Notes: {{ project.project_notes|length }}</p>
+    <p>Total Notes: {{ project.project_notes|length }}</p>
+
+        <p>
+            <a href="{{ url_for('add_note', project_id=project.id) }}">
+                Add Note
+            </a>
+        </p>
 
 {% for note in project.project_notes %}
 
@@ -214,8 +220,14 @@
             </a>
         </p>
 
-    <p>
-        <a href="{{ url_for('add_note', project_id=project.id) }}">
-            Add Note
-        </a>
-    </p>
+   
+
+    {% for instruction in project.instructions %}
+
+        <div style="margin-bottom: 20px;">
+
+            <p>{{ instruction.instruction_text }}</p>
+
+        </div>
+
+    {% endfor %}
