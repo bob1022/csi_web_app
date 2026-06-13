@@ -413,6 +413,59 @@ def add_instruction(project_id):
         "instruction/add_instruction.html",
         project=project
     )
+#$ Edit Instruction
+@app.route(
+    "/instruction/<int:instruction_id>/edit",
+    methods=["GET", "POST"]
+)
+def edit_instruction(instruction_id):
+
+    instruction = Instruction.query.get_or_404(
+        instruction_id
+    )
+
+    if request.method == "POST":
+
+        instruction.instruction_text = request.form[
+            "instruction_text"
+        ]
+
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=instruction.project_id
+            )
+        )
+
+    return render_template(
+        "instruction/edit_instruction.html",
+        instruction=instruction
+    )
+
+#$ Delete Instruction
+@app.route(
+    "/instruction/<int:instruction_id>/delete"
+)
+def delete_instruction(instruction_id):
+
+    instruction = Instruction.query.get_or_404(
+        instruction_id
+    )
+
+    project_id = instruction.project_id
+
+    db.session.delete(instruction)
+    db.session.commit()
+
+    return redirect(
+        url_for(
+            "project_detail",
+            project_id=project_id
+        )
+    )
+
 
 # *============================================================
 # * Edit Project
