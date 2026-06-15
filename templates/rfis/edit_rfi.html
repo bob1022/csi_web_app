@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit RFI</title>
+</head>
+<body>
+
+<h1>Edit RFI</h1>
+
+<form method="post">
+
+    <label>RFI Number:</label>
+    <input
+        type="text"
+        name="rfi_number"
+        value="{{ rfi.rfi_number }}"
+        required
+    >
+
+    <br><br>
+
+    <label>Description:</label>
+    <input
+        type="text"
+        name="description"
+        value="{{ rfi.description }}"
+        size="60"
+        required
+    >
+
+    <br><br>
+
+<label>Discipline:</label>
+
+<select name="discipline">
+
+    <option {% if rfi.discipline == "Architect" %}selected{% endif %}>
+        Architect
+    </option>
+
+    <option {% if rfi.discipline == "Structural Engineer" %}selected{% endif %}>
+        Structural Engineer
+    </option>
+
+    <option {% if rfi.discipline == "Mechanical Engineer" %}selected{% endif %}>
+        Mechanical Engineer
+    </option>
+
+    <option {% if rfi.discipline == "Electrical Engineer" %}selected{% endif %}>
+        Electrical Engineer
+    </option>
+
+    <option {% if rfi.discipline == "Civil Engineer" %}selected{% endif %}>
+        Civil Engineer
+    </option>
+
+    <option {% if rfi.discipline == "Geotechnical Engineer" %}selected{% endif %}>
+        Geotechnical Engineer
+    </option>
+
+    <option {% if rfi.discipline == "Fire Protection Engineer" %}selected{% endif %}>
+        Fire Protection Engineer
+    </option>
+
+    <option {% if rfi.discipline == "Owner" %}selected{% endif %}>
+        Owner
+    </option>
+
+    <option {% if rfi.discipline == "Other" %}selected{% endif %}>
+        Other
+    </option>
+
+</select>
+
+<br><br>
+
+<label>Date Submitted:</label>
+
+<input
+    type="date"
+    name="date_submitted"
+    value="{{ rfi.date_submitted }}"
+    required
+>
+
+<br><br>
+
+<label>Date Due:</label>
+
+<input
+    type="date"
+    name="date_due"
+    value="{{ rfi.date_due }}"
+    required
+>
+
+<br><br>
+
+<label>Status:</label>
+
+<select name="status">
+
+    <option {% if rfi.status == "Open" %}selected{% endif %}>
+        Open
+    </option>
+
+    <option {% if rfi.status == "Answered" %}selected{% endif %}>
+        Answered
+    </option>
+
+    <option {% if rfi.status == "Closed" %}selected{% endif %}>
+        Closed
+    </option>
+
+</select>
+
+<br><br>
+
+<button
+    type="submit"
+    style="
+        font-size:16px;
+        padding:8px 16px;
+    "
+>
+    Save Changes
+</button>
+
+</form>
+
+</body>
+</html>

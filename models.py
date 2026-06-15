@@ -40,6 +40,13 @@ class Project(db.Model):
         cascade="all, delete-orphan"
     )
 
+    rfis = db.relationship(
+        "RFI",
+        backref="project",
+        lazy=True,
+        cascade="all, delete-orphan"
+    )
+
     checklist_items = db.relationship(
         "ChecklistItem",
         backref="project",
@@ -127,3 +134,50 @@ class Instruction(db.Model):
 
     def __repr__(self):
         return f"<Instruction {self.id}>" 
+
+class RFI(db.Model):
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    project_id = db.Column(
+        db.Integer,
+        db.ForeignKey("project.id"),
+        nullable=False
+    )
+
+    rfi_number = db.Column(
+        db.String(20),
+        nullable=False
+    )
+
+    description = db.Column(
+        db.String(200),
+        nullable=False
+    )
+
+    discipline = db.Column(
+        db.String(50),
+        nullable=False
+    )
+
+    date_submitted = db.Column(
+        db.Date,
+        nullable=False
+    )
+
+    date_due = db.Column(
+        db.Date,
+        nullable=False
+    )
+
+    status = db.Column(
+        db.String(20),
+        nullable=False,
+        default="Open"
+    )
+
+    def __repr__(self):
+        return f"<RFI {self.rfi_number}>"     
