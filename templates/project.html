@@ -314,4 +314,80 @@
 
 {% endfor %}
 
-   
+<h2>Submittal Log</h2>
+
+<p>
+    Total Submittals:
+    {{ project.submittals|length }}
+</p>
+
+<p>
+    <a href="{{ url_for(
+        'add_submittal',
+        project_id=project.id
+    ) }}">
+        Add Submittal
+    </a>
+</p> 
+
+{% for submittal in project.submittals %}
+
+    <div style="margin-bottom: 20px;">
+
+        <p>
+            <strong>
+                {{ submittal.submittal_number }}
+            </strong>
+        </p>
+
+        <p>
+            {{ submittal.description }}
+        </p>
+
+        <p>
+            Submitted By:
+            {{ submittal.submitted_by }}
+        </p>
+
+        <p>
+            Discipline:
+            {{ submittal.discipline }}
+        </p>
+
+        <p>
+            Submitted:
+            {{ submittal.date_submitted }}
+        </p>
+
+        <p>
+            Due:
+            {{ submittal.date_due }}
+        </p>
+
+        <p>
+            Status:
+            {{ submittal.status }}
+        </p>
+
+        <a href="{{ url_for(
+            'edit_submittal',
+            submittal_id=submittal.id
+        ) }}">
+            Edit
+        </a>
+ 
+        &nbsp;&nbsp;
+
+        <a href="{{ url_for(
+            'delete_submittal',
+            submittal_id=submittal.id
+        ) }}"
+        onclick="return confirm(
+            'Delete this submittal?'
+        );">
+            Delete
+        </a>
+    
+    </div>
+
+{% endfor %}

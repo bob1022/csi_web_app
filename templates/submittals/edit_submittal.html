@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Submittal</title>
+</head>
+<body>
+
+<h1>Edit Submittal</h1>
+
+<form method="post">
+
+    <label for="submittal_number">
+        Submittal Number:
+    </label>
+    <input
+        type="text"
+        name="submittal_number"
+        id="submittal_number"
+        value="{{ submittal.submittal_number }}"
+        required
+    >
+
+    <br><br>
+
+    <label for="description">
+        Description:
+    </label>
+    <input
+        type="text"
+        name="description"
+        id="description"
+        value="{{ submittal.description }}"
+        size="60"
+        required
+    >
+
+    <br><br>
+
+    <label for="submitted_by">
+        Submitted By:
+    </label>
+    <input
+        type="text"
+        name="submitted_by"
+        id="submitted_by"
+        value="{{ submittal.submitted_by }}"
+        size="40"
+        required
+    >
+
+    <br><br>
+
+    <label for="discipline">
+        Discipline:
+    </label>
+
+    <select
+        name="discipline"
+        id="discipline"
+    >
+        <option>Architect</option>
+        <option>Structural Engineer</option>
+        <option>Mechanical Engineer</option>
+        <option>Electrical Engineer</option>
+        <option>Civil Engineer</option>
+        <option>Geotechnical Engineer</option>
+        <option>Fire Protection Engineer</option>
+        <option>Owner</option>
+        <option>Other</option>
+    </select>
+
+    <br><br>
+
+    <label for="date_submitted">
+        Date Submitted:
+    </label>
+    <input
+        type="date"
+        name="date_submitted"
+        id="date_submitted"
+        value="{{ submittal.date_submitted }}"
+        required
+    >
+
+    <br><br>
+
+    <label for="date_due">
+        Date Due:
+    </label>
+    <input
+        type="date"
+        name="date_due"
+        id="date_due"
+        value="{{ submittal.date_due }}"
+        required
+    >
+
+    <br><br>
+
+    <label for="status">
+        Status:
+    </label>
+
+    <select
+        name="status"
+        id="status"
+    >
+        <option>Pending</option>
+        <option>Approved</option>
+        <option>Approved As Noted</option>
+        <option>Resubmit Required</option>
+        <option>Disapproved</option>
+    </select>
+
+    <br><br>
+
+    <button
+        type="submit"
+        style="
+            font-size:16px;
+            padding:8px 16px;
+        "
+    >
+        Save Changes
+    </button>
+
+</form>
+
+</body>
+</html>

@@ -47,6 +47,13 @@ class Project(db.Model):
         cascade="all, delete-orphan"
     )
 
+    submittals = db.relationship(
+        "Submittal",
+        backref="project",
+        lazy=True,
+        cascade="all, delete-orphan"
+    )
+
     checklist_items = db.relationship(
         "ChecklistItem",
         backref="project",
@@ -136,6 +143,7 @@ class Instruction(db.Model):
         return f"<Instruction {self.id}>" 
 
 class RFI(db.Model):
+    #$ Class RFI
 
     id = db.Column(
         db.Integer,
@@ -180,4 +188,62 @@ class RFI(db.Model):
     )
 
     def __repr__(self):
-        return f"<RFI {self.rfi_number}>"     
+        return f"<RFI {self.rfi_number}>"  
+class Submittal(db.Model):
+    #$ Class Submittal
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    project_id = db.Column(
+        db.Integer,
+        db.ForeignKey("project.id"),
+        nullable=False
+    )
+
+    submittal_number = db.Column(
+        db.String(20),
+        nullable=False
+    )
+
+    description = db.Column(
+        db.String(200),
+        nullable=False
+    )
+
+    submitted_by = db.Column(
+        db.String(100),
+        nullable=False
+    )
+
+    discipline = db.Column(
+        db.String(50),
+        nullable=False
+    )
+
+    date_submitted = db.Column(
+        db.Date,
+        nullable=False
+    )
+
+    date_due = db.Column(
+        db.Date,
+        nullable=False
+    )
+
+    status = db.Column(
+        db.String(30),
+        nullable=False,
+        default="Pending"
+    )
+
+    def __repr__(self):
+        return (
+            f"<Submittal "
+            f"{self.submittal_number}>"
+        )
+
+
+   
