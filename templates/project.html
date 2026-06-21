@@ -391,3 +391,42 @@
     </div>
 
 {% endfor %}
+
+<h2>Daily Reports</h2>
+<p>
+    Total Daily Reports:
+    {{ project.daily_reports|length }}
+</p>
+
+<p>
+    <a href="{{ url_for(
+        'add_daily_report',
+        project_id=project.id
+    ) }}">
+        Add Daily Report
+    </a>
+</p>
+
+{% for report in project.daily_reports %}
+    <hr>
+
+    <div style="margin-bottom:20px;">
+
+        <p>
+            <strong>
+                {{ report.report_date }}
+            </strong>
+        </p>
+
+        <p>
+            Weather:
+            {{ report.weather }}
+        </p>
+
+        <p>
+            {{ report.work_performed }}
+        </p>
+
+    </div>
+
+{% endfor %}

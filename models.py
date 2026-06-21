@@ -245,5 +245,32 @@ class Submittal(db.Model):
             f"{self.submittal_number}>"
         )
 
+class DailyReport(db.Model):
+    #$ Class DailyReport
+    id = db.Column(db.Integer, primary_key=True)
 
+    project_id = db.Column(
+        db.Integer,
+        db.ForeignKey('project.id'),
+        nullable=False
+    )
+
+    report_date = db.Column(db.Date, nullable=False)
+
+    weather = db.Column(db.String(100))
+
+    work_performed = db.Column(db.Text)
+
+    delays = db.Column(db.Text)
+
+    safety_notes = db.Column(db.Text)
+
+    tomorrow_work = db.Column(db.Text)
+
+    general_notes = db.Column(db.Text)
+
+    project = db.relationship(
+        'Project',
+        backref=db.backref('daily_reports', lazy=True)
+    )
    

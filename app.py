@@ -9,7 +9,8 @@ from flask import (
     render_template,
     request,
     redirect,
-    url_for
+    url_for,
+    flash
     )
 
 from flask import Flask, render_template
@@ -27,10 +28,13 @@ from models import (
     ProjectNote,
     Instruction,
     RFI,
-    Submittal
+    Submittal,
+    DailyReport
 )
+from routes.daily_reports import daily_reports_bp
 
 app = Flask(__name__)
+app.secret_key = "csi-development-key"
 
 #$ SQLite database location
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///csi_database.db"
@@ -314,6 +318,42 @@ def delete_note(note_id):
             "project_detail",
             project_id=project_id
         )
+    )
+    #$ Daily Reports
+@app.route(
+    "/project/<int:project_id>/add_daily_report",
+    methods=["GET", "POST"]
+)
+def add_daily_report(project_id):
+
+    project = Project.query.get_or_404(project_id)
+
+    if request.method == "POST":
+
+        report = DailyReport(
+            project_id=project_id,
+            report_date=datetime.strptime(
+            request.form.get("report_date"),
+            "%Y-%m-%d"
+        ).date(),
+            weather=request.form.get("weather"),
+            work_performed=request.form.get("work_performed")
+        )
+
+        db.session.add(report)
+        db.session.commit()
+
+        #*flash("Daily Report added successfully.", "success")
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=project_id
+            )
+        )
+    return render_template(
+        "daily_reports/add_daily_report.html",
+        project=project
     )
 
 #$ Reopen Item
@@ -788,7 +828,11 @@ def in_progress_item(item_id):
             project_id=item.project_id
         )
     )
+@app.route("/daily_reports")
+def daily_reports():
+    return "Daily Reports Module Working"
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
