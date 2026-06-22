@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Daily Report</title>
+</head>
+<body>
+
+<h1>Edit Daily Report</h1>
+
+<form method="post">
+
+    <p>
+        Weather:<br>
+        <input
+            type="text"
+            name="weather"
+            value="{{ report.weather }}">
+    </p>
+
+    <p>
+        Work Performed:<br>
+        <textarea
+            name="work_performed"
+            rows="8"
+            cols="60">{{ report.work_performed }}</textarea>
+    </p>
+
+    <button type="submit">
+        Save Changes
+    </button>
+
+</form>
+
+</body>
+</html>

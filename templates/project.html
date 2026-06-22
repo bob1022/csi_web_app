@@ -426,6 +426,26 @@
         <p>
             {{ report.work_performed }}
         </p>
+    <p>
+    <a href="{{ url_for(
+        'edit_daily_report',
+        report_id=report.id
+    ) }}">
+        Edit
+    </a>
+
+    &nbsp;&nbsp;
+
+    <a href="{{ url_for(
+        'delete_daily_report',
+        report_id=report.id
+    ) }}"
+    onclick="return confirm(
+        'Delete this daily report?'
+    );">
+        Delete
+    </a>
+</p>
 
     </div>
 
