@@ -1,70 +1,57 @@
-<!--$HTML template-->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CSI Projects</title>
-</head>
-<body>
+# * ============================================ # * CSI Projects template # *
+============================================
+<!-- # bug This is a hack -->
+<!-- # hack This is a hack-->
 
+<!doctype html>
+<html>
+  <head>
+    <title>CSI Projects</title>
+  </head>
+  <body>
     <h1>CSI Project List</h1>
 
     <p>
-        <a href="/add_project">
-            Add New Project
-        </a>
+      <a href="/add_project"> Add New Project </a>
     </p>
 
-    <hr>
+    <hr />
 
-    {% if project_data %}
+    {% if project_data %} {% for data in project_data %}
 
-    {% for data in project_data %}
+    <h3>
+      <a href="/project/{{ data.project.id }}">
+        {{ data.project.project_name }}
+      </a>
+    </h3>
 
-        <h3>
-            <a href="/project/{{ data.project.id }}">
-                {{ data.project.project_name }}
-            </a>
-        </h3>
+    <p>Progress: {{ data.progress_percent }}%</p>
 
-        <p>
-            Progress: {{ data.progress_percent }}%
-        </p>
-
-        <div style="width:300px; border:1px solid black;">
-
-            <div
-                style="
+    <div style="width: 300px; border: 1px solid black">
+      <div
+        style="
                     width: {{ data.progress_percent }}%;
                     background-color: lightgreen;
                     height: 20px;
                     text-align: center;
-                ">
-                {{ data.progress_percent }}%
-            </div>
+                "
+      >
+        {{ data.progress_percent }}%
+      </div>
+    </div>
 
-        </div>
+    <p>Open Items: {{ data.open_items }}</p>
 
-        <p>
-            Open Items: {{ data.open_items }}
-        </p>
+    <p>Completed Items: {{ data.completed_items }}</p>
 
-        <p>
-            Completed Items: {{ data.completed_items }}
-        </p>
+    <p>Total Items: {{ data.total_items }}</p>
 
-        <p>
-            Total Items: {{ data.total_items }}
-        </p>
+    <hr />
 
-        <hr>
-
-    {% endfor %}
-
-{% else %}
+    {% endfor %} {% else %}
 
     <p>No projects found.</p>
 
-{% endif %}
-
-</body>
+    {% endif %}
+  </body>
 </html>

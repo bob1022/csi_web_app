@@ -1,32 +1,28 @@
-<!DOCTYPE html>
+# * Add Project Note
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Add Project Note</title>
-</head>
-<body>
+  </head>
+  <body>
+    <!--# ! Add Project Note Using Better Comments Next with HTML  -->
+    <h1>Add Project Note</h1>
 
-<h1>Add Project Note</h1>
+    <form method="post">
+      <label for="note_text">Note:</label><br />
 
-<form method="post">
+      <textarea
+        name="note_text"
+        id="note_text"
+        rows="10"
+        cols="80"
+        placeholder="Enter project note here..."
+        required
+      ></textarea>
 
-    <label for="note_text">Note:</label><br>
+      <br /><br />
 
-    <textarea
-    name="note_text"
-    id="note_text"
-    rows="10"
-    cols="80"
-    placeholder="Enter project note here..."
-    required
-></textarea>
-
-    <br><br>
-
-    <button type="submit">
-        Save Note
-    </button>
-
-</form>
-
-</body>
+      <button type="submit">Save Note</button>
+    </form>
+  </body>
 </html>

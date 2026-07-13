@@ -1,28 +1,20 @@
-<!DOCTYPE html>
+# * Edit Instruction
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Edit Instruction</title>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Edit Instruction</h1>
 
-<h1>Edit Instruction</h1>
+    <form method="post">
+      <textarea name="instruction_text" rows="10" cols="80" required>
+{{ instruction.instruction_text }}</textarea
+      >
 
-<form method="post">
+      <br /><br />
 
-    <textarea
-        name="instruction_text"
-        rows="10"
-        cols="80"
-        required
-    >{{ instruction.instruction_text }}</textarea>
-
-    <br><br>
-
-    <button type="submit">
-        Save Changes
-    </button>
-
-</form>
-
-</body>
+      <button type="submit">Save Changes</button>
+    </form>
+  </body>
 </html>

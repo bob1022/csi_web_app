@@ -1,8 +1,8 @@
 
-#*==========================================
-#* app.py
-#*Main application file for the CSI Web App.
-#*==========================================
+# % ==========================================
+# %  app.py
+# %  Main application file for the CSI Web App.
+# %  ==========================================
 
 from flask import (
     Flask,
@@ -55,8 +55,9 @@ def home():
     
     #$ Home page route.
     return "CSI Web App Running"
-
-#$ Projects List
+# * ============================================================
+# ! Projects list
+# * ============================================================
 @app.route("/projects")
 def projects():
 
@@ -102,16 +103,15 @@ def projects():
         "index.html",
         project_data=project_data
     )
-
-#$ Add Item
+# * ============================================================
+# ! Add a checklist item to a project.
+# * ============================================================
 @app.route(
     "/project/<int:project_id>/add_item",
     methods=["GET", "POST"]
 )
 def add_item(project_id):
     
-    #$ Add a checklist item to a project.
-
     project = Project.query.get_or_404(project_id)
 
     if request.method == "POST":
@@ -141,11 +141,13 @@ def add_item(project_id):
         "add_item.html",
         project=project
     )
-#$ Add Project
+# * ============================================================
+# ! Add Project
+# * ============================================================
 @app.route("/add_project", methods=["GET", "POST"])
 def add_project():
 
-    #$ Display project form and save project.
+    # $ Display project form and save project.
 
     if request.method == "POST":
 
@@ -164,14 +166,25 @@ def add_project():
         return redirect(url_for("projects"))
 
     return render_template("add_project.html")
-
-#$ Project Detail
+# * ============================================================
+# ! Project Detail
+# * ============================================================
 @app.route("/project/<int:project_id>")
 def project_detail(project_id):
     
-    #$ Display information for a single project.
+    # $ Display information for a single project.
 
     project = Project.query.get_or_404(project_id)
+    # $ Sort Checklist Items
+    # $ Open items appear first.
+    # $ Completed items appear last.
+    # $ Within each group, sort by CSI Division.
+
+    daily_reports = sorted(
+        project.daily_reports,
+        key=lambda report: report.report_date,
+        reverse=True
+    )
 
     sorted_items = sorted(
         project.checklist_items,
@@ -219,13 +232,16 @@ def project_detail(project_id):
         completed_items=completed_items,
         open_items=open_items,
         progress_percent=progress_percent,
-        sorted_items=sorted_items
+        sorted_items=sorted_items,
+        daily_reports=daily_reports
     )
-#$ Complete Item
+# * ============================================================
+# ! Complete Item
+# * ============================================================ 
 @app.route("/complete_item/<int:item_id>")
 def complete_item(item_id):
     
-    #$ Mark a checklist item as complete.
+    # $ Mark a checklist item as complete.
 
     item = ChecklistItem.query.get_or_404(item_id)
 
@@ -239,8 +255,9 @@ def complete_item(item_id):
             project_id=item.project_id
         )
     )
-
-#$ Add Note
+# * ============================================================
+# ! Add Note
+# * ============================================================
 @app.route(
     "/project/<int:project_id>/add_note",
     methods=["GET", "POST"]
@@ -272,8 +289,9 @@ def add_note(project_id):
         "notes/add_note.html",
         project=project
     )
-
-#$ Edit Note
+# * ============================================================
+# ! Edit Note
+# * ============================================================
 @app.route(
     "/note/<int:note_id>/edit",
     methods=["GET", "POST"]
@@ -299,8 +317,9 @@ def edit_note(note_id):
         "notes/edit_note.html",
         note=note
     )
-
-#$ Delete Note
+# * ============================================================
+# ! Delete Note
+# * ============================================================
 @app.route(
     "/note/<int:note_id>/delete"
 )
@@ -319,7 +338,9 @@ def delete_note(note_id):
             project_id=project_id
         )
     )
-    #$ Add Daily Reports
+# * ============================================================
+# ! Add Daily Report
+# * ============================================================
 @app.route(
     "/project/<int:project_id>/add_daily_report",
     methods=["GET", "POST"]
@@ -330,10 +351,10 @@ def add_daily_report(project_id):
 
     if request.method == "POST":
 
-        report = DailyReport(
-            project_id=project_id,
-            report_date=datetime.strptime(
-            request.form.get("report_date"),
+    report = DailyReport(
+        project_id=project_id,
+        report_date=datetime.strptime(
+        request.form.get("report_date"),
             "%Y-%m-%d"
         ).date(),
             weather=request.form.get("weather"),
@@ -355,8 +376,9 @@ def add_daily_report(project_id):
         "daily_reports/add_daily_report.html",
         project=project
     )
-
-    #$ Edit Daily Report
+# * ============================================================
+# ! Edit Daily Report
+# * ============================================================
 @app.route(
     "/daily_report/<int:report_id>/edit",
     methods=["GET", "POST"]
@@ -386,7 +408,9 @@ def edit_daily_report(report_id):
         "daily_reports/edit_daily_report.html",
         report=report
     )
-    #$ Delete Daily Report
+# * ============================================================
+# ! Delete Daily Report
+# * ============================================================
 @app.route(
     "/daily_report/<int:report_id>/delete"
 )
@@ -405,8 +429,9 @@ def delete_daily_report(report_id):
             project_id=project_id
         )
     )
-
-#$ Reopen Item
+# * ============================================================
+# ! Reopen Item
+# * ============================================================
 @app.route("/reopen_item/<int:item_id>")
 def reopen_item(item_id):
     
@@ -424,7 +449,9 @@ def reopen_item(item_id):
             project_id=item.project_id
         )
     )
-#$ Delete Item
+# * ============================================================
+# ! Delete Item
+# * ============================================================
 @app.route("/delete_item/<int:item_id>")
 def delete_item(item_id):
     
@@ -444,7 +471,9 @@ def delete_item(item_id):
             project_id=project_id
         )
     )
-#$ Edit Item
+# * ============================================================
+# ! Edit Item
+# * ============================================================
 @app.route(
     "/edit_item/<int:item_id>",
     methods=["GET", "POST"]
@@ -474,8 +503,9 @@ def edit_item(item_id):
         "edit_item.html",
         item=item
     )
-
-#$ Add Instruction
+# * ============================================================
+# ! Add Instruction
+# * ============================================================
 @app.route(
     "/project/<int:project_id>/add_instruction",
     methods=["GET", "POST"]
@@ -507,7 +537,9 @@ def add_instruction(project_id):
         "instruction/add_instruction.html",
         project=project
     )
-#$ Edit Instruction
+# * ============================================================
+# ! Edit Instructions
+# * ============================================================
 @app.route(
     "/instruction/<int:instruction_id>/edit",
     methods=["GET", "POST"]
@@ -537,8 +569,9 @@ def edit_instruction(instruction_id):
         "instruction/edit_instruction.html",
         instruction=instruction
     )
-
-#$ Delete Instruction
+# * ============================================================
+# ! Delete Instruction
+# * ============================================================
 @app.route(
     "/instruction/<int:instruction_id>/delete"
 )
@@ -559,8 +592,9 @@ def delete_instruction(instruction_id):
             project_id=project_id
         )
     )
-
-#$ Add RFI
+# * ============================================================
+# ! Add RFI
+# * ============================================================
 @app.route(
     "/project/<int:project_id>/add_rfi",
     methods=["GET", "POST"]
@@ -603,8 +637,9 @@ def add_rfi(project_id):
         "rfis/add_rfi.html",
         project=project
     )
-
-#$ Edit RFI
+# * ============================================================
+# ! Edit RFI
+# * ============================================================
 @app.route(
     "/rfi/<int:rfi_id>/edit",
     methods=["GET", "POST"]
@@ -654,8 +689,9 @@ def edit_rfi(rfi_id):
         "rfis/edit_rfi.html",
         rfi=rfi
     )
-
-#$ Delete RFI
+# * ============================================================
+# ! Delete RFI
+# * ============================================================
 @app.route(
     "/rfi/<int:rfi_id>/delete"
 )
@@ -674,8 +710,9 @@ def delete_rfi(rfi_id):
             project_id=project_id
         )
     )
-
-#$ Add Submittal
+# * ============================================================
+# ! Add Submittal
+# * ============================================================
 @app.route(
     "/project/<int:project_id>/add_submittal",
     methods=["GET", "POST"]
@@ -729,7 +766,10 @@ def add_submittal(project_id):
         "submittals/add_submittal.html",
         project=project
     )
-#$ Edit Submittal
+
+# * ============================================================
+# ! Edit Submittal
+# * ============================================================
 @app.route(
     "/submittal/<int:submittal_id>/edit",
     methods=["GET", "POST"]
@@ -786,7 +826,9 @@ def edit_submittal(submittal_id):
         submittal=submittal
     )
 
-#$ Delete Submittal
+# * ============================================================
+# ! Delete Submittal
+# * ============================================================
 @app.route(
     "/submittal/<int:submittal_id>/delete"
 )
@@ -808,9 +850,9 @@ def delete_submittal(submittal_id):
         )
     )
 
-# *============================================================
-# * Edit Project
-# *============================================================
+# * ============================================================
+# ! Edit Project
+# * ============================================================
 
 @app.route(
     "/edit_project/<int:project_id>",
@@ -842,9 +884,9 @@ def edit_project(project_id):
         project=project
     )
 
-# *============================================================
-# * Delete Project
-# *===========================================================
+# * ============================================================
+# ! Delete Project
+# * ===========================================================
 
 @app.route("/delete_project/<int:project_id>")
 def delete_project(project_id):
@@ -859,9 +901,9 @@ def delete_project(project_id):
         url_for("projects")
     )
 
-# *============================================================
+# * ============================================================
 # * Mark Item In Progress
-# *============================================================
+# * ============================================================
 
 @app.route("/in_progress_item/<int:item_id>")
 def in_progress_item(item_id):

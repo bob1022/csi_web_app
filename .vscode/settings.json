@@ -1,0 +1,186 @@
+{
+  "editor.formatOnSave": true,
+  "notebook.formatOnSave.enabled": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "better-comments.tags": [
+    {
+      "tag": "!",
+      "color": "#f80410",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#7afa05",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#474747",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "todo",
+      "color": "#f8e609",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#f0e10f",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "&",
+      "color": "#579ff2",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "%",
+      "color": "#07f5b9",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "$",
+      "color": "#e5f507",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "bug",
+      "color": "#E84393",
+      "strikethrough": false,
+      "underline": true,
+      "backgroundColor": "#FDA7DF20",
+      "bold": true,
+      "italic": false
+    },
+    {
+      "tag": "hack",
+      "color": "#9B59B6",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "#9B59B620",
+      "bold": true,
+      "italic": true
+    },
+    {
+      "tag": "#",
+      "color": "#ccd4c5",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    }
+  ],
+  "window.customTitleBarVisibility": "auto",
+  "workbench.accounts.experimental.showEntitlements": true,
+  "workbench.commandPalette.experimental.suggestCommands": true,
+  "workbench.startupEditor": "none",
+  "workbench.iconTheme": "material-icon-theme",
+  "explorer.fileNesting.enabled": true,
+  "workbench.tree.indent": 25,
+  "update.mode": "manual",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      "icon": "terminal-bash"
+    },
+    "zsh": {
+      "path": "zsh"
+    },
+    "fish": {
+      "path": "fish"
+    },
+    "tmux": {
+      "path": "tmux",
+      "icon": "terminal-tmux"
+    },
+    "pwsh": {
+      "path": "pwsh",
+      "icon": "terminal-powershell"
+    }
+  },
+  "editor.minimap.renderCharacters": false,
+  "indentRainbow.colors": [
+    "07f5b9",
+    "rgba(255,255,64,0.07)",
+    "rgba(127,255,127,0.07)",
+    "rgba(255,127,255,0.07)",
+    "rgba(79,236,236,0.07)"
+  ],
+  "RainbowBrackets.depreciation-notice": false,
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.autoSave": "afterDelay",
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.rulers": [88],
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "editor.guides.bracketPairs": true,
+  "better-comments.strict": true,
+  "editor.colorDecorators": true,
+  "workbench.colorCustomizations": {
+  "editor.background": "#181616",
+  "color": "#ff0000",
+  "editorCursor.foreground": "#ff0000",
+    "editor.guides.bracketPairs": true,
+  "better-comments.strict": true,
+  "editor.colorDecorators": true,
+  "workbench.colorCustomizations": {
+    "editor.background": "#181616",
+    "editorCursor.foreground": "#ff0000",
+    "statusBar.background": "#FDA7DF",
+    "activityBar.background": "#9B59B6",
+    "sideBar.background": "#0b0b0b"
+  },
+}

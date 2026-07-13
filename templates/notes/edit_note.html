@@ -1,28 +1,20 @@
-<!DOCTYPE html>
+# * Edit Project Notes
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Edit Note</title>
-</head>
-<body>
+  </head>
+  <body>
+    <h1>Edit Project Note</h1>
 
-<h1>Edit Project Note</h1>
+    <form method="post">
+      <textarea name="note_text" rows="10" cols="80" required>
+{{ note.note_text }}</textarea
+      >
 
-<form method="post">
+      <br /><br />
 
-    <textarea
-        name="note_text"
-        rows="10"
-        cols="80"
-        required
-    >{{ note.note_text }}</textarea>
-
-    <br><br>
-
-    <button type="submit">
-        Save Changes
-    </button>
-
-</form>
-
-</body>
+      <button type="submit">Save Changes</button>
+    </form>
+  </body>
 </html>
