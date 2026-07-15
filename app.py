@@ -47,6 +47,7 @@ db.init_app(app)
 # $ Create database and tables
 with app.app_context():
     db.create_all()
+app.register_blueprint(daily_reports_bp)
 
 # $ Home page route
 @app.route("/")
@@ -327,7 +328,7 @@ def delete_note(note_id):
             project_id=project_id
         )
     )
-# * ============================================================
+""" # * ============================================================
 # ! Add Daily Report
 # * ============================================================
 @app.route("/project/<int:project_id>/add_daily_report",
@@ -363,8 +364,8 @@ def add_daily_report(project_id):
     return render_template(
         "daily_reports/add_daily_report.html",
         project=project
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Edit Daily Report
 # * ============================================================
 @app.route("/daily_report/<int:report_id>/edit",
@@ -394,8 +395,8 @@ def edit_daily_report(report_id):
     return render_template(
         "daily_reports/edit_daily_report.html",
         report=report
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Delete Daily Report
 # * ============================================================
 @app.route("/daily_report/<int:report_id>/delete"
@@ -414,7 +415,7 @@ def delete_daily_report(report_id):
             "project_detail",
             project_id=project_id
         )
-    )
+    ) """
 # * ============================================================
 # ! Reopen Item Reopen a completed checklist item.
 # * ============================================================

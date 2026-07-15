@@ -401,8 +401,8 @@
 
 <p>
     <a href="{{ url_for(
-        'add_daily_report',
-        project_id=project.id
+    'daily_reports.add_daily_report',
+    project_id=project.id
     ) }}">
         Add Daily Report
     </a>
@@ -429,7 +429,7 @@
         </p>
     <p>
     <a href="{{ url_for(
-        'edit_daily_report',
+        'daily_reports.edit_daily_report',
         report_id=report.id
     ) }}">
         Edit
@@ -437,10 +437,9 @@
 
     &nbsp;&nbsp;
 
-    <a href="{{ url_for(
-        'delete_daily_report',
-        report_id=report.id
-    ) }}"
+    <a href="{{ url_for('daily_reports.delete_daily_report',
+        report_id=report.id)
+    }}"
     onclick="return confirm(
         'Delete this daily report?'
     );">
