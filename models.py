@@ -1,17 +1,17 @@
 
-#$============================================
-#$models.py
-#$Database models for the CSI Web App.
-#$Defines the Project and ChecklistItem models using SQLAlchemy.
-#$============================================
+# * ============================================
+# ! models.py
+# ! Database models for the CSI Web App.
+# ! Defines the Project and ChecklistItem models using SQLAlchemy.
+# * ============================================
 
 from database import db
 
 
 class Project(db.Model):
-    
-    #$Stores project information.
-
+    # * ============================================
+    # ! Stores project information.
+    # * ============================================
     id = db.Column(
         db.Integer,
         primary_key=True
@@ -65,9 +65,9 @@ class Project(db.Model):
         return f"<Project {self.project_name}>"
     
 class ChecklistItem(db.Model):
-    
-    #$Stores checklist items for a project.
-
+    # * ============================================
+    # ! Stores checklist items for a project.
+    # * ============================================
     id = db.Column(
         db.Integer,
         primary_key=True
@@ -99,9 +99,9 @@ class ChecklistItem(db.Model):
         return f"<ChecklistItem {self.description}>"
 
 class ProjectNote(db.Model):
-
-    #$  Stores notes for a project.
-
+    # * ============================================
+    # !  Stores notes for a project.
+    # * ============================================
     id = db.Column(
         db.Integer,
         primary_key=True
@@ -122,6 +122,9 @@ class ProjectNote(db.Model):
         return f"<ProjectNote {self.id}>"
     
 class Instruction(db.Model):
+    # * ============================================
+    # ! Stores instructions for a project.
+    # * ============================================
 
     id = db.Column(
         db.Integer,
@@ -143,7 +146,9 @@ class Instruction(db.Model):
         return f"<Instruction {self.id}>" 
 
 class RFI(db.Model):
-    #$ Class RFI
+    # * ============================================
+    # ! Stores RFI information for a project.
+    # * ============================================
 
     id = db.Column(
         db.Integer,
@@ -190,7 +195,9 @@ class RFI(db.Model):
     def __repr__(self):
         return f"<RFI {self.rfi_number}>"  
 class Submittal(db.Model):
-    #$ Class Submittal
+    # * ============================================
+    # ! Stores submittal information for a project.
+    # * ============================================
 
     id = db.Column(
         db.Integer,
@@ -246,7 +253,9 @@ class Submittal(db.Model):
         )
 
 class DailyReport(db.Model):
-    #$ Class DailyReport
+    # * ==============================================
+    # ! Stores daily report information for a project.
+    # * ==============================================
     id = db.Column(db.Integer, primary_key=True)
 
     project_id = db.Column(

@@ -15,8 +15,8 @@
       "italic": false
     },
     {
-      "tag": "?",
-      "color": "#7afa05",
+      "tag": "@",
+      "color": "#fa0594c9",
       "strikethrough": false,
       "underline": false,
       "backgroundColor": "transparent",
@@ -24,17 +24,8 @@
       "italic": false
     },
     {
-      "tag": "//",
-      "color": "#474747",
-      "strikethrough": true,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "todo",
-      "color": "#f8e609",
+      "tag": "#",
+      "color": "#ccd4c5",
       "strikethrough": false,
       "underline": false,
       "backgroundColor": "transparent",
@@ -42,17 +33,8 @@
       "italic": false
     },
     {
-      "tag": "*",
-      "color": "#f0e10f",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "&",
-      "color": "#579ff2",
+      "tag": "$",
+      "color": "#07f513b9",
       "strikethrough": false,
       "underline": false,
       "backgroundColor": "transparent",
@@ -69,8 +51,44 @@
       "italic": false
     },
     {
-      "tag": "$",
-      "color": "#e5f507",
+      "tag": "&",
+      "color": "#579ff2",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#f0e10f",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#7afa05",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#e6e224ea",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    }, 
+    {
+      "tag": "todo",
+      "color": "#f8e609",
       "strikethrough": false,
       "underline": false,
       "backgroundColor": "transparent",
@@ -79,31 +97,22 @@
     },
     {
       "tag": "bug",
-      "color": "#E84393",
+      "color": "#04041acb",
       "strikethrough": false,
       "underline": true,
-      "backgroundColor": "#FDA7DF20",
+      "backgroundColor": "#64c6dfe1",
       "bold": true,
       "italic": false
     },
     {
       "tag": "hack",
-      "color": "#9B59B6",
+      "color": "#0f0f0f",
       "strikethrough": false,
       "underline": false,
-      "backgroundColor": "#9B59B620",
+      "backgroundColor": "#c55164fa",
       "bold": true,
       "italic": true
     },
-    {
-      "tag": "#",
-      "color": "#ccd4c5",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    }
   ],
   "window.customTitleBarVisibility": "auto",
   "workbench.accounts.experimental.showEntitlements": true,
