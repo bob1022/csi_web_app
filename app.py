@@ -32,6 +32,8 @@ from models import (
 )
 from routes.daily_reports import daily_reports_bp
 
+from routes.notes import notes_bp
+
 app = Flask(__name__)
 app.secret_key = "csi-development-key"
 
@@ -48,6 +50,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 app.register_blueprint(daily_reports_bp)
+app.register_blueprint(notes_bp)
 
 # $ Home page route
 @app.route("/")
@@ -248,7 +251,7 @@ def complete_item(item_id):
             project_id=item.project_id
         )
     )
-# * ============================================================
+""" # * ============================================================
 # ! Add Note
 # * ============================================================
 @app.route("/project/<int:project_id>/add_note",
@@ -280,7 +283,7 @@ def add_note(project_id):
     return render_template(
         "notes/add_note.html",
         project=project
-    )
+    ) """
 # * ============================================================
 # ! Edit Note
 # * ============================================================
