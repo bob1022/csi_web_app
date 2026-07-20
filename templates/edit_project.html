@@ -1,48 +1,35 @@
-
 # * Edit Project
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Edit Project</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Edit Project</h1>
 
     <form method="POST">
+      <label> Project Name: </label>
 
-        <label>
-            Project Name:
-        </label>
+      <input
+        type="text"
+        name="project_name"
+        value="{{ project.project_name }}"
+        required
+      />
 
-        <input
-            type="text"
-            name="project_name"
-            value="{{ project.project_name }}"
-            required
-        >
+      <br /><br />
 
-        <br><br>
+      <label> Project Description: </label>
 
-        <label>
-            Project Description:
-        </label>
+      <br />
 
-        <br>
+      <textarea name="project_description" rows="6" cols="60">
+        {{ project.project_description }}</textarea
+      >
 
-        <textarea
-            name="notes"
-            rows="6"
-            cols="60"
-        >{{ project.notes }}</textarea>
+      <br /><br />
 
-        <br><br>
-
-        <button type="submit">
-            Save Changes
-        </button>
-
+      <button type="submit">Save Changes</button>
     </form>
-
-</body>
+  </body>
 </html>

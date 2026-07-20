@@ -1,52 +1,31 @@
 <!-- # * Add project form-->
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Add Project</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Add Project</h1>
 
     <form method="POST">
+      <label for="project_name"> Project Name: </label>
 
-        <label for="project_name">
-            Project Name:
-        </label>
+      <input type="text" id="project_name" name="project_name" required />
 
-        <input
-            type="text"
-            id="project_name"
-            name="project_name"
-            required
-        >
-        
-        <br><br>
+      <br /><br />
 
-        <label>
-            Notes:
-        </label>
+      <label> Notes: </label>
 
-        <br>
+      <br />
 
-        <textarea
-            name="notes"
-            rows="5"
-            cols="50">
-        </textarea>
+      <textarea name="project_description" rows="5" cols="50"> </textarea>
 
-        <br><br>
+      <br /><br />
 
-        <button type="submit">
-            Add Project
-        </button>
-
+      <button type="submit">Add Project</button>
     </form>
-<p>
-    <a href="/projects">
-        Back to Projects
-    </a>
-</p>
-
-</body>
+    <p>
+      <a href="/projects"> Back to Projects </a>
+    </p>
+  </body>
 </html>
