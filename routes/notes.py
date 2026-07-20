@@ -3,7 +3,7 @@ from flask import (
     request,
     render_template,
     redirect,
-    url_forgit 
+    url_for 
 )
 from database import db
 
@@ -49,6 +49,56 @@ def add_note(project_id):
         "notes/add_note.html",
         project=project
     )
+# * ============================================================
+# ! Edit Note
+# * ============================================================
+@notes_bp.route("/note/<int:note_id>/edit",
+    methods=["GET", "POST"]
+)
+def edit_note(note_id):
+
+    note = ProjectNote.query.get_or_404(note_id)
+
+    if request.method == "POST":
+
+        note.note_text = request.form["note_text"]
+
+        db.session.commit()
+
+        return redirect(
+            url_for(
+                "project_detail",
+                project_id=note.project_id
+            )
+        )
+
+    return render_template(
+        "notes/edit_note.html",
+        note=note
+    )
+# * ============================================================
+# ! Delete Note
+# * ============================================================
+@notes_bp.route("/note/<int:note_id>/delete"
+)
+def delete_note(note_id):
+
+    note = ProjectNote.query.get_or_404(note_id)
+
+    project_id = note.project_id
+
+    db.session.delete(note)
+    db.session.commit()
+
+    return redirect(
+        url_for(
+            "project_detail",
+            project_id=project_id
+        )
+    )
+
+
+
 
 
 

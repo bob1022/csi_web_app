@@ -1,9 +1,9 @@
 
-# * ============================================
+# & ============================================
 # ! models.py
 # ! Database models for the CSI Web App.
 # ! Defines the Project and ChecklistItem models using SQLAlchemy.
-# * ============================================
+# & ============================================
 
 from database import db
 

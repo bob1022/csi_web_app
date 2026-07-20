@@ -1,8 +1,8 @@
 
-# * ==========================================
+# & ==========================================
 # !  app.py
 # !  Main application file for the CSI Web App.
-# *  ==========================================
+# &  ==========================================
 
 from flask import (
     Flask,
@@ -30,9 +30,15 @@ from models import (
     Submittal,
     DailyReport
 )
+from routes.checklist_routes import checklist
+
 from routes.daily_reports import daily_reports_bp
 
 from routes.notes import notes_bp
+
+from routes.rfi import rfi
+
+from routes.submittals import submittals
 
 app = Flask(__name__)
 app.secret_key = "csi-development-key"
@@ -51,6 +57,9 @@ with app.app_context():
     db.create_all()
 app.register_blueprint(daily_reports_bp)
 app.register_blueprint(notes_bp)
+app.register_blueprint(checklist)
+app.register_blueprint(rfi)
+app.register_blueprint(submittals)
 
 # $ Home page route
 @app.route("/")
@@ -105,7 +114,7 @@ def projects():
         "index.html",
         project_data=project_data
     )
-# * ============================================================
+""" # * ============================================================
 # ! Add a checklist item to a project.
 # * ============================================================
 @app.route("/project/<int:project_id>/add_item",
@@ -141,7 +150,7 @@ def add_item(project_id):
     return render_template(
         "add_item.html",
         project=project
-    )
+    ) """
 # * ============================================================
 # ! Add Project Display project form and save project.
 # * ============================================================
@@ -223,34 +232,16 @@ def project_detail(project_id):
     )
 
     return render_template(
-        "project.html",
-        project=project,
-        total_items=total_items,
-        completed_items=completed_items,
-        open_items=open_items,
-        progress_percent=progress_percent,
-        sorted_items=sorted_items,
-        daily_reports=daily_reports
-    )
-# * ============================================================
-# ! Complete Item Mark a checklist item as complete.
-# * ============================================================ 
-@app.route("/complete_item/<int:item_id>")
-def complete_item(item_id):
-    
+    "project.html",
+    project=project,
+    total_items=total_items,
+    completed_items=completed_items,
+    open_items=open_items,
+    progress_percent=progress_percent,
+    sorted_items=sorted_items,
+    daily_reports=daily_reports,
+)
 
-    item = ChecklistItem.query.get_or_404(item_id)
-
-    item.status = "Complete"
-
-    db.session.commit()
-
-    return redirect(
-        url_for(
-            "project_detail",
-            project_id=item.project_id
-        )
-    )
 """ # * ============================================================
 # ! Add Note
 # * ============================================================
@@ -284,7 +275,7 @@ def add_note(project_id):
         "notes/add_note.html",
         project=project
     ) """
-# * ============================================================
+""" # * ============================================================
 # ! Edit Note
 # * ============================================================
 @app.route("/note/<int:note_id>/edit",
@@ -310,8 +301,8 @@ def edit_note(note_id):
     return render_template(
         "notes/edit_note.html",
         note=note
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Delete Note
 # * ============================================================
 @app.route("/note/<int:note_id>/delete"
@@ -330,7 +321,7 @@ def delete_note(note_id):
             "project_detail",
             project_id=project_id
         )
-    )
+    ) """
 """ # * ============================================================
 # ! Add Daily Report
 # * ============================================================
@@ -419,7 +410,26 @@ def delete_daily_report(report_id):
             project_id=project_id
         )
     ) """
-# * ============================================================
+""" # * ============================================================
+# ! Complete Item Mark a checklist item as complete.
+# * ============================================================ 
+@app.route("/complete_item/<int:item_id>")
+def complete_item(item_id):
+    
+
+    item = ChecklistItem.query.get_or_404(item_id)
+
+    item.status = "Complete"
+
+    db.session.commit()
+
+    return redirect(
+        url_for(
+            "project_detail",
+            project_id=item.project_id
+        )
+    ) """
+""" # * ============================================================
 # ! Reopen Item Reopen a completed checklist item.
 # * ============================================================
 @app.route("/reopen_item/<int:item_id>")
@@ -436,8 +446,8 @@ def reopen_item(item_id):
             "project_detail",
             project_id=item.project_id
         )
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Delete Item Delete a checklist item.
 # * ============================================================
 @app.route("/delete_item/<int:item_id>")
@@ -456,8 +466,8 @@ def delete_item(item_id):
             "project_detail",
             project_id=project_id
         )
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Edit Item Edit an existing checklist item.
 # * ============================================================
 @app.route("/edit_item/<int:item_id>",
@@ -485,7 +495,7 @@ def edit_item(item_id):
     return render_template(
         "edit_item.html",
         item=item
-    )
+    ) """
 # * ============================================================
 # ! Add Instruction
 # * ============================================================
@@ -572,7 +582,7 @@ def delete_instruction(instruction_id):
             project_id=project_id
         )
     )
-# * ============================================================
+""" # * ============================================================
 # ! Add RFI
 # * ============================================================
 @app.route("/project/<int:project_id>/add_rfi",
@@ -615,8 +625,8 @@ def add_rfi(project_id):
     return render_template(
         "rfis/add_rfi.html",
         project=project
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Edit RFI
 # * ============================================================
 @app.route("/rfi/<int:rfi_id>/edit",
@@ -666,8 +676,8 @@ def edit_rfi(rfi_id):
     return render_template(
         "rfis/edit_rfi.html",
         rfi=rfi
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Delete RFI
 # * ============================================================
 @app.route("/rfi/<int:rfi_id>/delete"
@@ -686,8 +696,8 @@ def delete_rfi(rfi_id):
             "project_detail",
             project_id=project_id
         )
-    )
-# * ============================================================
+    ) """
+""" # * ============================================================
 # ! Add Submittal
 # * ============================================================
 @app.route("/project/<int:project_id>/add_submittal",
@@ -741,9 +751,9 @@ def add_submittal(project_id):
     return render_template(
         "submittals/add_submittal.html",
         project=project
-    )
+    ) """
 
-# * ============================================================
+""" # * ============================================================
 # ! Edit Submittal
 # * ============================================================
 @app.route("/submittal/<int:submittal_id>/edit",
@@ -799,9 +809,9 @@ def edit_submittal(submittal_id):
     return render_template(
         "submittals/edit_submittal.html",
         submittal=submittal
-    )
+    ) """
 
-# * ============================================================
+""" # * ============================================================
 # ! Delete Submittal
 # * ============================================================
 @app.route("/submittal/<int:submittal_id>/delete"
@@ -822,7 +832,7 @@ def delete_submittal(submittal_id):
             "project_detail",
             project_id=project_id
         )
-    )
+    ) """
 
 # * ============================================================
 # ! Display and edit project form and save changes.
